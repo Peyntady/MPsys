@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h> //Использовали true для бессконечного цикла
+#include <stdbool.h>
 
 
 float addition(int d){
