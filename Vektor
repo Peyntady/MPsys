@@ -42,11 +42,11 @@ float degree() {
 }
 
 float vectorchar(){
-    float a,b,c,h; // Умножение вектора с 3 координатами на число h
+    float a,b,c,h;
     puts("enter the coordinates vector");
-    scanf("%f %f %f",&a,&b,&c); //Ввод вектора
+    scanf("%f %f %f",&a,&b,&c);
     puts("What number do you want to multiply the vector of?");
-    scanf("%f",&h);// На какое число нам умножать вектора
+    scanf("%f",&h);
     a = a * h;
     b = b * h;
     c = c * h;
@@ -54,24 +54,22 @@ float vectorchar(){
 }
 
 float vectorarifmetic() {
-    int a, g; // C помощью переменной 'a' задаем длинну вектора, а с помощью переменной g команду для ветторов /сложение/вычитание/умнлжение
+    int a, g;
 
-    float d; //Промежуточный контейнер для хранение результата операции над векторами. Нужен для удобства. Можно убрать при надобности. Убирать я его не хочу
+    float d;
 
-    float *vector1 = NULL, *vector2 = NULL; //Два вектора незивестной длинны. Для них мы не освобождали память
+    float *vector1 = NULL, *vector2 = NULL;
 
-    puts("V kakom n-mernom prostranstve budut vectora"); //Вычисление векторов может происходить в 2-х мерном пространстве, 3-х мерном и тд
-    scanf("%i", &a); //Пользователь задает длинну вектора
-
+    puts("V kakom n-mernom prostranstve budut vectora");
+    scanf("%i", &a);
     if (a > 0) {
         puts("Vvedite 1 vector");
-        vector1 = malloc(a * sizeof(float)); //Выделиние памяти для 3-х чисел типа "float
-        for (int i = 0; i < a; i++) {  //ввод каждого элемента вектора
-            printf("vector1[%d]", i); //Просьба ввести вектор определенного номер
-            scanf("%f", &vector1[i]); // Считывание вектора
+        vector1 = malloc(a * sizeof(float));
+            printf("vector1[%d]", i);
+            scanf("%f", &vector1[i]);
         }
 
-        puts("Vvedite 2 vector"); //Аналогичные операции и со 2 вектором
+        puts("Vvedite 2 vector");
         vector2 = malloc(a * sizeof(float));
         for (int i = 0; i < a; i++) {
             printf("vector2[%d]", i);
@@ -81,29 +79,29 @@ float vectorarifmetic() {
         puts("What operation do you want to perform?\n"
              "1- Addition\n"
              "2-Subtraction\n"
-             "3- Scalar product"); // Выбор операции с векторами
-        scanf("%i", &g); //Выбор операции над уже заданными векторами
+             "3- Scalar product");
+        scanf("%i", &g);
 
         switch (g) {
             case 1:
-                printf("{"); // Скобка для красоты
-                for (int i = 0; i < a; i++) { //Операции с ветором и вывод их на экрна
+                printf("{");
+                for (int i = 0; i < a; i++) {
                     d = vector1[i] + vector2[i];
                     printf("%.2f\t", d);
                 }
                 puts("\b}");
                 free(vector1);
-                free(vector2); //Освобождеение памяти
+                free(vector2);
                 break;
             case 2:
-                printf("{"); // Или для удобства
-                for (int i = 0; i < a; i++) { //Операции с ветором и вывод их на экрна
+                printf("{");
+                for (int i = 0; i < a; i++) {
                     d = vector1[i] - vector2[i];
                     printf("%.2f\t", d);
                 }
                 puts("\b}");
                 free(vector1);
-                free(vector2); //Освобождение памяти
+                free(vector2);
                 break;
             case 3:
                 d = 0;
@@ -112,12 +110,12 @@ float vectorarifmetic() {
                 }
                 printf("%.2f\t", d);
                 free(vector1);
-                free(vector2);  //Освобождение памяти
+                free(vector2);
                 break;
         }
     }
     else {
-        puts("Пространство не может быть без направлений или n-мерное пространство не может быть отрицательным");
+        puts("Prostranstvo dolzhno imet napravlenie / n-mernoe prostranstvo dolzhno bit polozhitelnim");
     }
     return 0;
 }
