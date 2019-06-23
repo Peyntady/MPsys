@@ -1,168 +1,135 @@
 #include <stdio.h>
+
+#include <locale.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 
-float addition(int d){
-    float a,b;
-    puts("Vvedite pervoe chislo");
-    scanf("%f",&a);
-    puts("Vvedite vtoroe chislo");
-    scanf("%f", &b);
-    switch (d) {
-        case 1:
-            return a + b;
-        case 2:
-            return a - b;
-        case 3:
-            return a * b;
-        case 4:
-            return a / b;
-    }
-    return 0;
-}
 
+int main(void)
+{
+    int *vector_1;
+    int *vector_2;
+    char operation_type = 0;
+    float *vector_result;
+    int size = 0;
+    int i = 0;
 
-float degree() {
-    float a,k;
-    int s;
-    puts("Vvedite chislo:");
-    scanf("%f", &a);
-    puts("Vvedite stepen:");
-    scanf("%i", &s);
-    k = a;
-    if (s != 0) {
-        for (int i = 1; i < s; i++) {
-            a = a * k;
-        }
-        return a;
-    } else {
-        return 1;
-    }
-}
+    setlocale(LC_ALL, "Russian");
 
-float vectorchar(){
-    float a,b,c,h;
-    puts("enter the coordinates vector");
-    scanf("%f %f %f",&a,&b,&c);
-    puts("What number do you want to multiply the vector of?");
-    scanf("%f",&h);
-    a = a * h;
-    b = b * h;
-    c = c * h;
-    return printf("%.2f %.2f %.2f\t",a,b,c);
-}
+    do
+    {
+        puts("Vvedite vektori:");
+        scanf("%i", &size);
 
-float vectorarifmetic() {
-    int a, g;
-
-    float d;
-
-    float *vector1 = NULL, *vector2 = NULL;
-
-    puts("V kakom n-mernom prostranstve budut vectora");
-    scanf("%i", &a);
-    if (a > 0) {
-        puts("Vvedite 1 vector");
-        vector1 = malloc(a * sizeof(float));
-            printf("vector1[%d]", i);
-            scanf("%f", &vector1[i]);
-        }
-
-        puts("Vvedite 2 vector");
-        vector2 = malloc(a * sizeof(float));
-        for (int i = 0; i < a; i++) {
-            printf("vector2[%d]", i);
-            scanf("%f", &vector2[i]);
-        }
-
-        puts("What operation do you want to perform?\n"
-             "1- Addition\n"
-             "2-Subtraction\n"
-             "3- Scalar product");
-        scanf("%i", &g);
-
-        switch (g) {
-            case 1:
-                printf("{");
-                for (int i = 0; i < a; i++) {
-                    d = vector1[i] + vector2[i];
-                    printf("%.2f\t", d);
-                }
-                puts("\b}");
-                free(vector1);
-                free(vector2);
-                break;
-            case 2:
-                printf("{");
-                for (int i = 0; i < a; i++) {
-                    d = vector1[i] - vector2[i];
-                    printf("%.2f\t", d);
-                }
-                puts("\b}");
-                free(vector1);
-                free(vector2);
-                break;
-            case 3:
-                d = 0;
-                for (int i = 0; i < a; i++) {
-                    d = d + (vector1[i] * vector2[i]);
-                }
-                printf("%.2f\t", d);
-                free(vector1);
-                free(vector2);
-                break;
-        }
-    }
-    else {
-        puts("Prostranstvo dolzhno imet napravlenie / n-mernoe prostranstvo dolzhno bit polozhitelnim");
-    }
-    return 0;
-}
-
-float factorial(){
-    int y;
-    float a;
-    puts("Vvedite chislo dlya nahozhdenia factoriala");
-    scanf("%f",&a);
-    y = 1;
-    for(int i=1;i <= a;i++) y = y * i;
-    return y;
-}
-
-int main(void) {
-    int d, returncom;
-    while(true) {
-        puts("1-Slocgenie\n2-Vichitanie\n3-Umnozenie\n4-Delenie\n5-Stepeni\n6-factorial\n7-vector operation\n8-multiply vector by number\ncommand:");
-        scanf("%i", &d);
-        if ((d >= 1) && (d <= 8)) {
-            if ((d <= 4) && (d > 0)) {
-                printf("Resultat: %f\n", addition(d));
-            } else {
-                switch (d) {
-                    case 5:
-                        printf("resultat: %.2f\n", degree());
-                        break;
-                    case 6:
-                        printf("resultat: %.2f\n", factorial());
-                    case 7:
-                        vectorarifmetic();
-                        break;
-                    case 8:
-                        vectorchar();
-                        break;
-                }
+        if (size <= 10)
+        {
+            vector_1 = calloc(size, sizeof(int));
+            puts("Vvedite koordinati 1 vektora");
+            for (i = 0; i < size; i++) {
+                printf("vector_1[%i]=", i);
+                scanf("%i", &vector_1[i]);
             }
-        } else {
-            puts("Nepravilnaya comanda");
+
+            puts("Vvedite operaciu");
+            puts("(+,-,*,/,)(q - выход)");
+            scanf(" %c", &operation_type);
+
+            switch (operation_type)
+            {
+                case '+':
+                    vector_2 = calloc(size, sizeof(int));
+                    puts("Vvedite koordinati 2 vektora");
+                    for (i = 0; i < size; i++) {
+                        printf("vector_2[%i]=", i);
+                        scanf("%i", &vector_2[i]);
+                    }
+
+                    vector_result = calloc(size, sizeof(float));
+
+                    for (i = 0; i < size; i++) {
+                        vector_result[i] = vector_1[i] + vector_2[i];
+                    }
+
+                    puts("Otvet:");
+                    for (i = 0; i < size; i++) {
+                        printf( "vector_result[%i] = %f \n", i, vector_result[i]);
+                    }
+                    break;
+                case '-':
+                    vector_2 = calloc(size, sizeof(int));
+                    puts("Vvedite koordinati 2 vektora");
+                    for (i = 0; i < size; i++) {
+                        printf("vector_2[%i]=", i);
+                        scanf("%i", &vector_2[i]);
+                    }
+
+                    vector_result = calloc(size, sizeof(float));
+
+                    for (i = 0; i < size; i++) {
+                        vector_result[i] = vector_1[i] - vector_2[i];
+                    }
+
+                    puts("Otvet:");
+                    for (i = 0; i < size; i++) {
+                        printf( "vector_result[%i] = %f \n", i, vector_result[i]);
+                    }
+                    break;
+                case '*':
+                    vector_2 = calloc(size, sizeof(int));
+                    puts("Vvedite koortdinati 2 vektora");
+                    for (i = 0; i < size; i++) {
+                        printf("vector_2[%i]=", i);
+                        scanf("%i", &vector_2[i]);
+                    }
+
+                    vector_result = calloc(size, sizeof(float));
+
+                    for (i = 0; i < size; i++) {
+                        vector_result[i] = vector_1[i] * vector_2[i];
+                    }
+
+                    puts("Otvet:");
+                    for (i = 0; i < size; i++) {
+                        printf( "vector_result[%i] = %f \n", i, vector_result[i]);
+                    }
+                    break;
+                case '/':
+                    vector_2 = calloc(size, sizeof(int));
+                    puts("Vvedite koordinati 2 vektora");
+                    for (i = 0; i < size; i++) {
+                        printf("vector_2[%i]=", i);
+                        scanf("%i", &vector_2[i]);
+                    }
+
+                    vector_result = calloc(size, sizeof(float));
+
+                    for (i = 0; i < size; i++) {
+                        vector_result[i] = vector_1[i] / vector_2[i];
+                    }
+
+                    puts("Otvet:");
+                    for (i = 0; i < size; i++) {
+                        printf( "vector_result[%i] = %f \n", i, vector_result[i]);
+                    }
+                    break;
+                case 'q':
+                    puts("Vihod is programi");
+                    break;
+                default:
+                    puts("Nedostupno");
+                    puts("Poprobuite snova");
+                    break;
+            }
         }
-        puts("Prodolzhit? Vvedite 1 ili luboe chislo chtobi viyti");
-        scanf("%i", &returncom);
-        if (returncom == 1) {
-            continue;
-        } else {
-            puts("Zachem vi vishli?!?!?! Vam ne ponravilsya calculator?!");
-            break;
+        else
+        {
+            puts("Slishkom bolshoy vektor");
         }
     }
+    while (operation_type != 'q');
+    free(vector_1);
+    free(vector_2);
+    free(vector_result);
+
+    puts("Zavershenie");
 }
